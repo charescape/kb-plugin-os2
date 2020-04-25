@@ -1,6 +1,6 @@
 <?php
 
-namespace Kanboard\Plugin\Aliyun;
+namespace Kanboard\Plugin\AliyunObjectStorageService;
 
 use Kanboard\Core\Plugin\Base;
 use Kanboard\Core\Translator;
@@ -16,7 +16,7 @@ class Plugin extends Base
     {
         if ($this->isConfigured()) {
             $this->container['objectStorage'] = function() {
-                return new ObjectStorageService(
+                return new ObjectStorage(
                     $this->getAliyunAccessKey(),
                     $this->getAliyunSecretKey(),
                     $this->getAliyunRegion(),

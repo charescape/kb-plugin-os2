@@ -1,6 +1,6 @@
 <?php
 
-namespace Kanboard\Plugin\Aliyun;
+namespace Kanboard\Plugin\AliyunObjectStorageService;
 
 require_once __DIR__.'/vendor/aliyun-oss-php-sdk/autoload.php';
 
@@ -9,7 +9,7 @@ use Kanboard\Core\ObjectStorage\ObjectStorageException;
 use OSS\Core\OssException;
 use OSS\OssClient;
 
-class ObjectStorageService implements ObjectStorageInterface
+class ObjectStorage implements ObjectStorageInterface
 {
     /**
      * @var OssClient
