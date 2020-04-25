@@ -25,7 +25,7 @@ class Plugin extends Base
             };
         }
 
-        $this->template->hook->attach('template:config:integrations', 'os2:config');
+        $this->template->hook->attach('template:config:integrations', 'aliyunObjectStorageService:config');
     }
 
     public function onStartup()
