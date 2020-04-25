@@ -2,7 +2,7 @@
 
 namespace Kanboard\Plugin\AliyunObjectStorageService;
 
-require_once __DIR__.'/vendor/aliyun-oss-php-sdk/autoload.php';
+require_once __DIR__ . '/vendor/aliyun-oss-php-sdk/autoload.php';
 
 use Kanboard\Core\ObjectStorage\ObjectStorageInterface;
 use Kanboard\Core\ObjectStorage\ObjectStorageException;
@@ -56,7 +56,7 @@ class ObjectStorage implements ObjectStorageInterface
      * Fetch object contents
      *
      * @access public
-     * @param  string  $key
+     * @param string $key
      * @return string
      * @throws  ObjectStorageException
      */
@@ -121,7 +121,7 @@ class ObjectStorage implements ObjectStorageInterface
      * Output directly object content
      *
      * @access public
-     * @param  string  $key
+     * @param string $key
      */
     public function output($key)
     {
@@ -129,15 +129,16 @@ class ObjectStorage implements ObjectStorageInterface
             if ($this->client->doesObjectExist($this->bucket, $this->getObjectPath($key))) {
                 @readfile($this->getObjectUrl($key));
             }
-        } catch (OssException $e) {}
+        } catch (OssException $e) {
+        }
     }
 
     /**
      * Move local file to object storage
      *
      * @access public
-     * @param  string  $filename
-     * @param  string  $key
+     * @param string $filename
+     * @param string $key
      * @return boolean
      * @throws ObjectStorageException
      */
@@ -190,7 +191,8 @@ class ObjectStorage implements ObjectStorageInterface
     {
         try {
             $this->client->deleteObject($this->bucket, $this->getObjectPath($key));
-        } catch (OssException $e) {}
+        } catch (OssException $e) {
+        }
 
         return true;
     }
