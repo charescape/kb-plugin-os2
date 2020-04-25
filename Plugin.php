@@ -5,8 +5,8 @@ namespace Kanboard\Plugin\Aliyun;
 use Kanboard\Core\Plugin\Base;
 use Kanboard\Core\Translator;
 
-defined('ALIYUN_OSS_KEY') or define('ALIYUN_OSS_KEY', ''); // aliyun_oss_akey_id
-defined('ALIYUN_OSS_SECRET') or define('ALIYUN_OSS_SECRET', ''); // aliyun_oss_akey_secret
+defined('ALIYUN_OSS_KEY') or define('ALIYUN_OSS_KEY', ''); // aliyun_oss_accesskey_id
+defined('ALIYUN_OSS_SECRET') or define('ALIYUN_OSS_SECRET', ''); // aliyun_oss_accesskey_secret
 defined('ALIYUN_OSS_BUCKET') or define('ALIYUN_OSS_BUCKET', ''); // aliyun_oss_bucket
 defined('ALIYUN_OSS_ENDPOINT') or define('ALIYUN_OSS_ENDPOINT', ''); // aliyun_oss_endpoint
 
@@ -84,7 +84,7 @@ class Plugin extends Base
             return ALIYUN_OSS_KEY;
         }
 
-        return $this->configModel->get('aliyun_oss_akey_id');
+        return $this->configModel->get('aliyun_oss_accesskey_id');
     }
 
     public function getAliyunSecretKey()
@@ -93,7 +93,7 @@ class Plugin extends Base
             return ALIYUN_OSS_SECRET;
         }
 
-        return $this->configModel->get('aliyun_oss_akey_secret');
+        return $this->configModel->get('aliyun_oss_accesskey_secret');
     }
 
     public function getAliyunRegion()
