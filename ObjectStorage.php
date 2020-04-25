@@ -40,9 +40,15 @@ class ObjectStorage implements ObjectStorageInterface
         $this->bucket = $bucket;
 
         try {
-            $this->client = new OssClient($key, $secret, $this->endpoint);
+            $this->client = new OssClient($key, $secret, $endpoint . '.aliyuncs.com');
         } catch (OssException $e) {
-            throw new ObjectStorageException('Object not found');
+            throw new ObjectStorageException(
+                'OssClient init fail'
+                . (is_string($this->bucket) ? "[$this->bucket]" : '-')
+                . (is_string($endpoint) ? "[$endpoint]" : '-')
+                . (is_string($key) ? "[$key]" : '-')
+                . (is_string($e->getMessage()) ? sprintf('[%s]', $e->getMessage()) : '-')
+            );
         }
     }
 
@@ -59,17 +65,31 @@ class ObjectStorage implements ObjectStorageInterface
         try {
             $hasFile = $this->client->doesObjectExist($this->bucket, $this->getObjectPath($key));
         } catch (OssException $e) {
-            throw new ObjectStorageException('Object check fail');
+            throw new ObjectStorageException(
+                'Object exist-check fail'
+                . (is_string($this->bucket) ? "[$this->bucket]" : '-')
+                . (is_string($key) ? "[$key]" : '-')
+                . (is_string($e->getMessage()) ? sprintf('[%s]', $e->getMessage()) : '-')
+            );
         }
 
         if (!$hasFile) {
-            throw new ObjectStorageException('Object not found');
+            throw new ObjectStorageException(
+                'Object not found'
+                . (is_string($this->bucket) ? "[$this->bucket]" : '-')
+                . (is_string($key) ? "[$key]" : '-')
+            );
         }
 
         try {
             $data = $this->client->getObject($this->bucket, $this->getObjectPath($key));
         } catch (OssException $e) {
-            throw new ObjectStorageException('Object download fail');
+            throw new ObjectStorageException(
+                'Object download fail'
+                . (is_string($this->bucket) ? "[$this->bucket]" : '-')
+                . (is_string($key) ? "[$key]" : '-')
+                . (is_string($e->getMessage()) ? sprintf('[%s]', $e->getMessage()) : '-')
+            );
         }
 
         return $data;
@@ -86,7 +106,12 @@ class ObjectStorage implements ObjectStorageInterface
         try {
             $this->client->putObject($this->bucket, $this->getObjectPath($key), $blob);
         } catch (OssException $e) {
-            throw new ObjectStorageException('Unable to save object');
+            throw new ObjectStorageException(
+                'Unable to save object'
+                . (is_string($this->bucket) ? "[$this->bucket]" : '-')
+                . (is_string($key) ? "[$key]" : '-')
+                . (is_string($e->getMessage()) ? sprintf('[%s]', $e->getMessage()) : '-')
+            );
         }
 
         return true;
@@ -129,7 +154,13 @@ class ObjectStorage implements ObjectStorageInterface
                 $this->client->putObject($this->bucket, $this->getObjectPath($key), file_get_contents($filename));
             }
         } catch (OssException $e) {
-            throw new ObjectStorageException('Unable to upload file');
+            throw new ObjectStorageException(
+                'Unable to upload file'
+                . (is_string($filename) ? "[$filename]" : '-')
+                . (is_string($this->bucket) ? "[$this->bucket]" : '-')
+                . (is_string($key) ? "[$key]" : '-')
+                . (is_string($e->getMessage()) ? sprintf('[%s]', $e->getMessage()) : '-')
+            );
         }
 
         if (is_file($filename)) {
