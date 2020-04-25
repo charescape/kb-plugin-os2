@@ -2,7 +2,7 @@
 
 namespace Kanboard\Plugin\Aliyun;
 
-require_once __DIR__.'/vendor/Oss/autoload.php';
+require_once __DIR__.'/vendor/aliyun-oss-php-sdk/autoload.php';
 
 use Kanboard\Core\ObjectStorage\ObjectStorageInterface;
 use Kanboard\Core\ObjectStorage\ObjectStorageException;
