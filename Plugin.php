@@ -15,7 +15,7 @@ class Plugin extends Base
     public function initialize()
     {
         if ($this->isConfigured()) {
-            $this->container['objectStorage'] = function() {
+            $this->container['objectStorage'] = function () {
                 return new ObjectStorage(
                     $this->getAliyunAccessKey(),
                     $this->getAliyunSecretKey(),
@@ -30,7 +30,7 @@ class Plugin extends Base
 
     public function onStartup()
     {
-        Translator::load($this->languageModel->getCurrentLanguage(), __DIR__.'/Locale');
+        Translator::load($this->languageModel->getCurrentLanguage(), __DIR__ . '/Locale');
     }
 
     public function getPluginName()
